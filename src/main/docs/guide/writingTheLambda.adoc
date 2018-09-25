@@ -1,0 +1,6 @@
+Create the function:
+
+[source, bash]
+----
+mn create-function example.micronaut.vies-vat-validator --lang groovy
+----

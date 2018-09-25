@@ -1,0 +1,63 @@
+Create an interface to abstract the collaboration with the function:
+
+[source,groovy]
+.invoice/src/main/groovy/example/micronaut/VatValidator.groovy
+----
+include::{sourceDir}/invoice/src/main/groovy/example/micronaut/VatValidator.groovy[]
+----
+
+<1> Functions that only return a value are mapped to HTTP GET requests, whilst functions that accept an input require an HTTP POST. Thus, use `@Body` to supply the POJO.
+
+Create two POJOs which are used by the previous interface:
+
+[source,groovy]
+.invoice/src/main/groovy/example/micronaut/VatValidationRequest.groovy
+----
+include::{sourceDir}/invoice/src/main/groovy/example/micronaut/VatValidationRequest.groovy[]
+----
+
+[source,groovy]
+.invoice/src/main/groovy/example/micronaut/VatValidation.groovy
+----
+include::{sourceDir}/invoice/src/main/groovy/example/micronaut/VatValidation.groovy[]
+----
+
+Modify `build.gradle` to add `function-client` and `com.amazonaws:aws-java-sdk-lambda` dependencies:
+
+[source,groovy]
+.invoice/build.gradle
+----
+include::{sourceDir}/invoice/build.gradle[tag=function-client,indent=false]
+----
+
+Also modify `src/main/resources/application.yml` and the define a function with the same name `vies-vat-validator` as the one we deployed to AWS Lambda:
+
+[source,yaml]
+.invoice/src/main/resources/application.yml
+----
+include::{sourceDir}/invoice/src/main/resources/application.yml[tag=aws]
+----
+
+Add the next configuration properties which we will use shortly:
+
+[source,yaml]
+.invoice/src/main/resources/application.yml
+----
+include::{sourceDir}/invoice/src/main/resources/application.yml[tag=vat]
+----
+
+Create `VatClient` to invoke our function:
+
+[source,groovy]
+.invoice/src/main/groovy/example/micronaut/VatClient.groovy
+----
+include::{sourceDir}/invoice/src/main/groovy/example/micronaut/VatClient.groovy[]
+----
+
+<1> The FunctionClient annotation allows applying introduction advise to an interface such that methods defined by the interface become invokers of remote functions configured by the application.
+<4> You can remove a bean from the test classpath easily.
+<3> Use the function name `vies-vat-validator`
+<4> AWS Lambda functions may take time to warm up. Thus, failure is something you have to plan for and it is pretty common to want to attempt to retry an operation if it fails.
+With https://docs.micronaut.io/snapshot/guide/index.html#retry[Micronaut Retry] you can try again easily.
+<5> Functions that only return a value are mapped to HTTP GET requests, whilst functions that accept an input require an HTTP POST. Thus, use `@Body` to supply the POJO.
+

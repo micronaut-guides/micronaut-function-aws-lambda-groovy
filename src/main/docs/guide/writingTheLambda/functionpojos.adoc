@@ -1,0 +1,32 @@
+Create a POJO to encapsulate the validation request:
+
+[source,json]
+----
+{
+  "memberStateCode": "es",
+  "vatNumber": "B86412491"
+}
+----
+
+[source,groovy]
+.vies-vat-validator/src/main/groovy/example/micronaut/VatValidationRequest.groovy
+----
+include::{sourceDir}/vies-vat-validator/src/main/groovy/example/micronaut/VatValidationRequest.groovy[]
+----
+
+And another POJO to encapsulate the expected response. Note: we add a `Boolean valid` property.
+
+[source,json]
+----
+{
+  "memberStateCode": "es",
+  "vatNumber": "B86412491"
+  "valid": true
+}
+----
+
+[source,groovy]
+.vies-vat-validator/src/main/groovy/example/micronaut/VatValidation.groovy
+----
+include::{sourceDir}/vies-vat-validator/src/main/groovy/example/micronaut/VatValidation.groovy[]
+----

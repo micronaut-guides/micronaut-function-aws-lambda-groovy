@@ -1,0 +1,19 @@
+Edit `ViesVatValidatorFunction`
+
+[source,groovy]
+.vies-vat-validator/src/main/groovy/example/micronaut/ViesVatValidatorFunction.groovy
+----
+include::{sourceDir}/vies-vat-validator/src/main/groovy/example/micronaut/ViesVatValidatorFunction.groovy[]
+----
+<1> In order to make use of dependency injection in your Groovy function, use the `groovy.transform.Field` annotation transform in addition to the `@Inject` annotation.
+<2> We define a method with a POJO as input or output. That it is the easiest way to have a parameter with an incoming JSON Payload
+and JSON Payload response.
+<3> We cannot return a non-blocking type due to AWS Lambda https://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-req-resp.html[Handler Input/Output supported Types].
+
+Modify `logback.xml` to set `DEBUG` level for package `example.micronaut`.
+
+[source,xml]
+.vies-vat-validator/src/main/resources/logback.xml
+----
+include::{sourceDir}/vies-vat-validator/src/main/resources/logback.xml[]
+----

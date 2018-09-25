@@ -1,0 +1,35 @@
+We expect to get an incoming JSON payload such as:
+
+[source, json]
+----
+{
+"vatNumber": "B86412491",
+"countryCode": "es",
+"lines": [
+    {
+        "count": 2,
+        "productId": "1491950358",
+        "price": 19.99
+    },
+    {
+        "count": 1,
+        "productId": "1680502395",
+        "price": 15
+    },
+]
+}
+----
+
+We create two POJOs to map it.
+
+[source,groovy]
+.invoice/src/main/groovy/example/micronaut/Invoice.groovy
+----
+include::{sourceDir}/invoice/src/main/groovy/example/micronaut/Invoice.groovy[]
+----
+
+[source,groovy]
+.invoice/src/main/groovy/example/micronaut/InvoiceLine.groovy
+----
+include::{sourceDir}/invoice/src/main/groovy/example/micronaut/InvoiceLine.groovy[]
+----

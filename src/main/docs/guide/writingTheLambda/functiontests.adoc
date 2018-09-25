@@ -1,0 +1,31 @@
+`build.gradle` already contains these dependencies:
+
+[source,groovy]
+.vies-vat-validator/build.gradle
+----
+include::{sourceDir}/vies-vat-validator/build.gradle[tag=testdependencies,indent=false]
+----
+
+Because of that, testing your functions is really easy.
+
+First modify `ViesVatValidatorClient` interface to match to the method signature forced by `Function<VatValidationRequest, VatValidation>`.
+
+[source,groovy]
+.vies-vat-validator/src/test/groovy/example/micronaut/ViesVatValidatorClient.groovy
+----
+include::{sourceDir}/vies-vat-validator/src/test/groovy/example/micronaut/ViesVatValidatorClient.groovy[]
+----
+
+<1> The `FunctionClient` annotation allows applying introduction advise to an interface such that methods defined by the interface become invokers of remote functions configured by the application.
+<2> For a method name `viesVatValidator` method the function URI is `vies-vat-validator`.
+<3> Functions that only return a value are mapped to HTTP GET requests, whilst functions that accept an input require an HTTP POST. Thus, use `@Body` to supply the POJO.
+
+Now you can start up the Micronaut application and access your function via the client interface in your test.
+
+Modify `ViesVatValidatorFunctionSpec.groovy`:
+
+[source,groovy]
+.vies-vat-validator/src/test/groovy/example/micronaut/ViesVatValidatorFunctionSpec.groovy
+----
+include::{sourceDir}/vies-vat-validator/src/test/groovy/example/micronaut/ViesVatValidatorFunctionSpec.groovy[]
+----

@@ -1,0 +1,25 @@
+gettingStarted: 
+  title: Getting Started
+  requirements: What you will need
+  solution: Solution
+writingTheLambda:
+  title: Writing the Function
+  functionpojos: POJOs
+  soap: SOAP VAT Validation
+  function: Function
+  functiontests: Function Tests
+sam: Test with SAM CLI
+awslambda:
+  title: Deploy to AWS Lambda
+writingTheApp:
+  title: Writing the App
+  pojos: POJOs
+  functionclient: Call the Function
+  controller: Controller
+  tests: Tests
+runningTheApp: Running the app
+awsApiGateway:
+  title: AWS API Gateway
+  awsApiGatewayUrlInMicronaut: Consume API Gateway URL
+nextSteps:
+  title: Next Steps
