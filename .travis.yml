@@ -1,16 +1,18 @@
 sudo: false
 cache:
   directories:
-  - "$HOME/.gradle"
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 jdk:
 - oraclejdk8
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 script:
 - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis-build-pr.sh; fi
 - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis-build.sh; fi
+env:
+  global:
+  - secure: hfPuo4O+BVYvMKu5rIAGEgTVufbYJO22PVcZavW7s21fBIF+ZEnjZkjK6v7SY8ILegrRn1H42v82dyD/Qu0BF5gmIT4ljDheWNWN5fFIZYPPW/fKwQFr5sTdI4FqsWxKACjDlkY7k9U7z6ba+BossaPF5l+9KCwffvM8KjFC9wV7O/fn/bvs2LxFI0B9qHIXT+aNc+mXt+Cm2PiT7CUr980O8vGe8TUfO6Oasxx2ANJCz3HSwLpF6hUHw3R5PUC9eT+0XAW1tixlBavQAXyIWof2Fe1eesSCQaB8Mxscg5yo8BsupKcjLlUSWiaCSwtTeb235swi6K8ozGScHyug9oMGOVVBWYOidPOg9f9orpr7U+pK4hWA5Ih31vutTbvlVUPH/rcBSchRv1WqJ9Cs2hHLIUUM5O+lUOJBIV0l2iareJYhNtxCQdH3SJMdNNODPp9Amlgr5vCVJ4Gopuq0Y0KI14n8qjn2u42LSCr1dpUcLy9WKNQ/ZFx7KYMdfa90sw39hCp1bMy/QmdPTV3wcq7Q41u5VXNrb5z8YehSvR4YyMUSHjH5MmG0F4C7BZ/w5D7Hyt5SkuL3ze7wGndaZ4yZ0wPxe0pQ78rWvYJmZMgcm155rVhcbZHn/T77Zj5yCIZlqQGBLv9bHJlWEzacyIsG54n3PYNHM7B5CHvHOwg=
+  - secure: WhudSvkWIxDx1wkRv2POroK32FzsEwU5T8A+ZkYDwoUG3bUztFFlnUXYqR/faExAsTlTrjEkTytxLlgK+8eJHTi/SoTvR70hSork32z/jnNSdZ5MSi49V6TqJhgwmOtDW8LH7eKK3JRmh17V+xBGT7Nz7aOD2ro0z0CLJ+yHqbCnFuLcaFzd3KPk7nrGBkUeu7g9ZhaxwJ8KJ7rTw7vh7qxsxLMY1Zjqa1MbTXmMXVSaWkG49rhw1HCdbMu7YHbn3nYvUOzXeobD8ld8Knt1p9J538JmE/KQIjzxWfLyJEh7b6sO3buTzehXtio1u6TjiTc2U4O2ouQdwJ+lbt6SZC+P6IfP873rhyFZkDxfeZ2m6rPTXv4t0V9/5EeLVipD3j30fvHOxPKxBd2dIRJiVusyahPY/SQjjBCejGEonDq1c/CuCQ2b6vUnhhkB63NvVvsBPpQZptGMaVlXfe7cBqrqMwqg4n9j4/hKFKnD+RAjgpIkQrXs+v+lv+FVIJOyhUwpSveuNXj7L9pV1NgzVdmTgiwIZkM0Jk/j9H0mqTNapBB8TNHCsQWnOepXweyojLmZ8TqWIRgAG1Q6ciRuqcgQrm2zbO0IfNbqhwXukMJhrfTfUGBcej1kMhPpMu7FGr+Z6bN6rUCrQLy4c7Tf6eg6MlwRPXPfBPScghBazrk=
+  - secure: icNn43fDJb44ajR8k77/7b9Xr312AI8kAzpZRdirz5zQKfFiBTr0ZbXBee76JBUoUpkKPIDRLqstePkH1dEh2NxnYyxHvlv4Q90ib2R2RQUrVzB2W2OBC0UlzPwbXGoCxrYr331bHkkN0GtS//BHK4nRLqAoHf8o7yd0RYcQ/rXXz23PelNSGXqiZZnEwPn8N+X+jcD3R9icl/xKH0O+sK7QWNMVb/ky3hzIIzz1AAiI37gOnqgwKgYrA/LUSeJiryaPwbTorJx3hZwiBk5L1y9ZBda1mxgegw4APKU4kZdwy4H9g6nZGNyXUDNRqWWEcE6SnD2JAHvwbqJs1J7y4fAYT57lNKMQhZVz+Pi8rZ6gbzPAV+BYKQyT3eqCJhkoJz+LxJHwA4E0dnhLloyJL2qwD+NsRCH+uLq+HznKMjUs3ofSYFhj+tq6foe4GdxEMnoUZ6a5uvzFA3ZsOgB+dbfTOLdI9+QLig0m+bbo8ip6avM1paWbOwBMQ/EmnsYK2ixBHjLYLvH1qaYXz9afWumXL7er/8LfjKixGpVAxv33oB43R888gFeYfaNC/jN/+lwpCU3uLT4kLgChcGbAM2Vlxwacpgm/b7mLn1Px57pBZOxlqjGPiplbtPwLPaKxobiYQF6H1pULTbcClYYVBqgeh0bDrLMfVQrcXy4B1u8=
