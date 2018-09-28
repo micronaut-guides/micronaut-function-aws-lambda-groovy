@@ -12,11 +12,11 @@ class InvoiceControllerSpec extends Specification {
 
     @Shared
     @AutoCleanup
-    EmbeddedServer embeddedServer = ApplicationContext.run(EmbeddedServer)
+    EmbeddedServer embeddedServer = ApplicationContext.run(EmbeddedServer) // <1>
 
     @Shared
     @AutoCleanup
-    RxHttpClient rxHttpClient = embeddedServer.applicationContext.createBean(RxHttpClient, embeddedServer.getURL())
+    RxHttpClient rxHttpClient = embeddedServer.applicationContext.createBean(RxHttpClient, embeddedServer.getURL()) // <2>
 
     void "test BooksController"() {
 
@@ -25,7 +25,7 @@ class InvoiceControllerSpec extends Specification {
 
         then:
         noExceptionThrown()
-        bean instanceof VatValidatorMock
+        bean instanceof VatValidatorMock // <3>
 
         when:
         Invoice invoice = new Invoice(vatNumber: "B84965375", countryCode: "es", lines: [
