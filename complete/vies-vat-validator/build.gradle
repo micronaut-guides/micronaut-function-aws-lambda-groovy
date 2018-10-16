@@ -30,30 +30,30 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom "io.micronaut:bom:$micronautVersion"
+        mavenBom "io.micronaut:micronaut-bom:$micronautVersion"
     }
 }
 
 dependencies {
-    compile "io.micronaut:function-groovy"
-    compile "io.micronaut:runtime-groovy"
-    compileOnly "io.micronaut:inject-groovy"
+    compile "io.micronaut:micronaut-function-groovy"
+    compile "io.micronaut:micronaut-runtime-groovy"
+    compileOnly "io.micronaut:micronaut-inject-groovy"
     runtime "ch.qos.logback:logback-classic:1.2.3"
     runtime "com.amazonaws:aws-lambda-java-log4j2:1.0.0"
     runtime "org.apache.logging.log4j:log4j-slf4j-impl:2.9.1"
-    testCompile "io.micronaut:function-client"
-    testCompile "io.micronaut:inject-groovy"
+    testCompile "io.micronaut:micronaut-function-client"
+    testCompile "io.micronaut:micronaut-inject-groovy"
     testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
         exclude group: "org.codehaus.groovy", module: "groovy-all"
     }
 
     //tag::testdependencies[]
-    testRuntime "io.micronaut:http-server-netty"
-    testRuntime "io.micronaut:function-web"
+    testRuntime "io.micronaut:micronaut-http-server-netty"
+    testRuntime "io.micronaut:micronaut-function-web"
     //end::testdependencies[]
 
     //tag::http-client[]
-    compile "io.micronaut:http-client"
+    compile "io.micronaut:micronaut-http-client"
     //end::http-client[]
 }
 
