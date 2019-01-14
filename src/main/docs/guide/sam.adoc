@@ -2,7 +2,7 @@ https://github.com/awslabs/aws-sam-cli[AWS SAM CLI] is a CLI tool for local deve
 
 NOTE: You can skip this section. If you want to complete this section you will need SAM and Docker installed.
 
-To test your Micronuat function with SAM you will first need to https://github.com/awslabs/aws-sam-cli/blob/develop/docs/installation.rst[install SAM].
+To test your Micronaut function with SAM you will first need to https://github.com/awslabs/aws-sam-cli/blob/develop/docs/installation.rst[install SAM].
 
 Then create a file `event.json`. We will use it as the stimulus for the SAM cli invocation.
 
