@@ -1,3 +1,2 @@
-include 'complete/invoice'
-include 'complete/vies-vat-validator'
-
+include 'complete:invoice'
+include 'complete:vies-vat-validator'
