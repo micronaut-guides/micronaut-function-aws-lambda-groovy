@@ -1,32 +1,24 @@
 package example.micronaut
 
-import io.micronaut.context.ApplicationContext
-import io.micronaut.runtime.server.EmbeddedServer
+import io.micronaut.test.annotation.MicronautTest
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import javax.inject.Inject
+
+@MicronautTest // <1>
 class ViesVatValidatorFunctionSpec extends Specification {
+
+    @Inject
+    ViesVatValidatorClient client // <2>
 
     @Unroll("#code #vatNumber is #description")
     void testViesVatValidatorFunction(String code, String vatNumber, boolean expected, String description) throws Exception {
-        given:
-        EmbeddedServer server = ApplicationContext.run(EmbeddedServer.class)
-
-        when:
-        ViesVatValidatorClient client = server.getApplicationContext().getBean(ViesVatValidatorClient.class)
-
-        then:
-        noExceptionThrown()
-
         when:
         VatValidationRequest req = new VatValidationRequest(memberStateCode: code, vatNumber: vatNumber)
 
         then:
         expected == client.apply(req).blockingGet().valid
-
-        cleanup:
-        server.stop()
-        server.close()
 
         where:
         code | vatNumber   | expected
@@ -35,6 +27,5 @@ class ViesVatValidatorFunctionSpec extends Specification {
         "es" | "XXXXXXXXX" | false
 
         description = expected ? 'is valid' : 'is invalid'
-
     }
 }

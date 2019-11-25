@@ -1,31 +1,31 @@
 package example.micronaut
 
-import io.micronaut.context.ApplicationContext
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.client.RxHttpClient
+import io.micronaut.http.client.annotation.Client
 import io.micronaut.runtime.server.EmbeddedServer
-import spock.lang.AutoCleanup
-import spock.lang.Shared
+import io.micronaut.test.annotation.MicronautTest
 import spock.lang.Specification
 
+import javax.inject.Inject
+
+@MicronautTest // <1>
 class InvoiceControllerSpec extends Specification {
 
-    @Shared
-    @AutoCleanup
-    EmbeddedServer embeddedServer = ApplicationContext.run(EmbeddedServer) // <1>
+    @Inject
+    @Client("/")
+    RxHttpClient rxHttpClient // <2>
 
-    @Shared
-    @AutoCleanup
-    RxHttpClient rxHttpClient = embeddedServer.applicationContext.createBean(RxHttpClient, embeddedServer.getURL()) // <2>
+    @Inject
+    EmbeddedServer server // <3>
 
-    void "test BooksController"() {
-
+    void "test InvoiceController"() {
         when:
-        VatValidator bean = embeddedServer.getApplicationContext().getBean(VatValidator.class)
+        VatValidator bean = server.getApplicationContext().getBean(VatValidator.class)
 
         then:
         noExceptionThrown()
-        bean instanceof VatValidatorMock // <3>
+        bean instanceof VatValidatorMock // <4>
 
         when:
         Invoice invoice = new Invoice(vatNumber: "B84965375", countryCode: "es", lines: [
