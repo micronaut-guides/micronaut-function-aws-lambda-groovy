@@ -23,3 +23,5 @@ awsApiGateway:
   awsApiGatewayUrlInMicronaut: Consume API Gateway URL
 nextSteps:
   title: Next Steps
+help:
+  title: Help with Micronaut  
